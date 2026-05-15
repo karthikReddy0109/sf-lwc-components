@@ -30,7 +30,35 @@ public with sharing class OpportunityTriggerHandler {
             ));
         }
         if(!accToUpdate.isEmpty()){
-            insert accToUpdate;
+            update accToUpdate;
+        }
+    }
+    
+    public static void salesRepNotificationOnBigDeal(List<Opportunity> oppList, Map<Id, Opportunity> oppOldMap){
+        List<Opportunity> qualifiedOpps = new List<Opportunity>();
+        Set<Id> ownerIds = new Set<Id>();
+        List<Messaging.singleEmailMessage> emailList = new List<Messaging.singleEmailMessage>();
+        for(Opportunity opp : oppList){
+            String oldStage = oppOldMap != null && oppOldMap.containsKey(opp.Id) ? oppOldMap.get(opp.Id).stageName : null;
+            Boolean isClosedWon = oldStage != 'Closed Won' && opp.StageName == 'Closed Won';
+            if(opp.Amount >= 10000 && isClosedWon){
+                qualifiedOpps.add(opp);
+                ownerIds.add(opp.OwnerId);
+            }
+        }
+        if(qualifiedOpps.isEmpty()) return;
+        Map<Id, User> userMap = new Map<Id, User>([SELECT Email FROM User WHERE Id IN: ownerIds]);
+        for(Opportunity opp : qualifiedOpps){
+            Messaging.singleEmailMessage mail = new Messaging.singleEmailMessage();
+            String ownerEmail = userMap.get(opp.ownerId).Email;
+            mail.setToAddresses(new String[]{ownerEmail});
+            mail.setSubject('Congratulation on Big Deal : ' + opp.Name);
+            mail.setPlainTextBody('Congratulations for winning a deal worth ' + opp.Amount);
+            emailList.add(mail);
+        }
+        if(!emailList.isEmpty()){
+            Messaging.sendEmail(emailList);
+            System.debug('Email sent successfully');
         }
     }
 }
