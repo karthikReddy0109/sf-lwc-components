@@ -61,4 +61,28 @@ public with sharing class OpportunityTriggerHandler {
             System.debug('Email sent successfully');
         }
     }
+    
+    public static void TrackstageHistory(List<Opportunity> oppNewList, Map<Id, Opportunity> oppOldMap){
+        List<Stage_History__c> stageHistoryList = new List<Stage_History__c>();
+        for(Opportunity opp : oppNewList){
+            Opportunity oldOpp = oppOldMap != null ? oppOldMap.get(opp.Id) : null;
+            // Check for Insert operation
+            if(oldOpp == null){
+                Stage_History__c sh = new Stage_History__c();
+                sh.Old_Stage__c = null;
+                sh.New_Stage__c = opp.StageName;
+                sh.Opportunity__c = opp.Id;
+                stageHistoryList.add(sh);
+            }else if(oldOpp.StageName != opp.stageName){
+                Stage_History__c sh = new Stage_History__c();
+                sh.Old_Stage__c = oldOpp.StageName;
+                sh.New_Stage__c = opp.StageName;
+                sh.Opportunity__c = opp.Id;
+                stageHistoryList.add(sh);
+            }
+        }
+        if(!stageHistoryList.isEmpty()){
+            insert stageHistoryList;
+        }
+    }
 }
