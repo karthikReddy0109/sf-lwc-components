@@ -1,0 +1,15 @@
+<template>
+    <lightning-card>
+        <template if:true={accountData}>
+            <div class="slds-p-around_small">
+                <p>Name : {accountData.name}</p>
+                <p>Industry : {accountData.industry}</p>
+                <p>Revenue : {accountData.annualRevenue}</p>
+                <p>Phone : {accountData.phone}</p>
+                <p>Open Opps : {accountData.openOppCount}</p>
+            </div>
+            
+        </template>
+        <lightning-button variant="brand" label="Refresh" onclick={handleRefresh} class="slds-m-left_x-small"></lightning-button>
+    </lightning-card>
+</template>

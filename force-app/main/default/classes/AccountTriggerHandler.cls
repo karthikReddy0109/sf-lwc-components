@@ -10,6 +10,8 @@ public with sharing class AccountTriggerHandler {
         }
         if(!conList.isEmpty()){
             insert conList;
+            AccountQueueable aq = new AccountQueueable(accList);
+            System.enqueueJob(aq);
         }
     }
 }
