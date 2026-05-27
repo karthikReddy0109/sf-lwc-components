@@ -4,7 +4,9 @@ import getAccountSummary from '@salesforce/apex/AccountSummaryController.getAcco
 
 export default class AccountSummaryCard extends LightningElement {
     @api recordId;
+    isLoading = true;
     accountData;
+    errorMsg;
     wiredResult;
     @wire(getAccountSummary, {recordId : '$recordId'})
     wiredAccount(result){
@@ -12,16 +14,18 @@ export default class AccountSummaryCard extends LightningElement {
         const{data, error} = result;
         if(data){
             this.accountData = data;
-            console.log(JSON.stringify(data));
+            this.errorMsg = undefined;
+            this.isLoading = false;
         }
         if(error){
-            console.log(error);
+            this.errorMsg = error?.body?.message || 'An error occurred';
+            this.accountData = undefined;
+            this.isLoading = false;
         }
     }
-    connectedCallback(){
-        console.log("Record ID : " + this.recordId);
-    }
+
     handleRefresh(){
+        this.isLoading = true;
         refreshApex(this.wiredResult)
     }
 }

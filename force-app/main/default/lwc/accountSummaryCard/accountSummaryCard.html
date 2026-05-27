@@ -1,14 +1,21 @@
 <template>
     <lightning-card>
+        <template if:true={isLoading}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="x-small"></lightning-spinner>
+            </div>
+        </template>
         <template if:true={accountData}>
             <div class="slds-p-around_small">
                 <p>Name : {accountData.name}</p>
                 <p>Industry : {accountData.industry}</p>
                 <p>Revenue : {accountData.annualRevenue}</p>
                 <p>Phone : {accountData.phone}</p>
-                <p>Open Opps : {accountData.openOppCount}</p>
+                <p>Open Opps : {accountData.openOppcount}</p>
             </div>
-            
+        </template>
+        <template if:true={errorMsg}>
+            <p>{errorMsg}</p>
         </template>
         <lightning-button variant="brand" label="Refresh" onclick={handleRefresh} class="slds-m-left_x-small"></lightning-button>
     </lightning-card>
