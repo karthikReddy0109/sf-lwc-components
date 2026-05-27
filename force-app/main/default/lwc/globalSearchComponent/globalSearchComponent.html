@@ -1,0 +1,26 @@
+<template>
+    <lightning-card>
+        <lightning-input
+            onchange={handleChange}
+        >
+        </lightning-input>
+        <template lwc:if={hasAccounts}>
+            <h1>Accounts</h1>
+            <template for:each={accounts} for:item="account">
+                <p key={account.Id}>{account.Name}</p>
+            </template>
+        </template>
+        <template lwc:if={hasContacts}>
+            <h1>Contacts</h1>
+            <template for:each={contacts} for:item="contact">
+                <p key={contact.Id}>{contact.FirstName}</p>
+            </template>
+        </template>
+        <template lwc:if={hasLeads}>
+            <h1>Leads</h1>
+            <template for:each={leads} for:item="lead">
+                <p key={lead.Id}>{lead.FirstName}</p>
+            </template>
+        </template>
+    </lightning-card>
+</template>
