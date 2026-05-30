@@ -1,0 +1,101 @@
+<template>
+    <lightning-card title="Sales Dashboard" icon-name="standard:dashboard">
+        <div class="slds-p-around_medium">
+            <div class="slds-grid slds-gutters">
+                <!-- Total Pipeline -->
+                <div class="slds-col">
+                    
+                    <div class="slds-box slds-text-align_center">
+                        <template lwc:if={isPipelineLoading}>
+                            <div class="exampleHolder">
+                                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                            </div>
+                        </template>
+                        <lightning-icon
+                            icon-name="standard:opportunity"
+                            size="small">
+                        </lightning-icon>
+                        <div class="slds-text-heading_large slds-m-top_x-small">
+                            {formattedPipeline}
+                        </div>
+                        <div class="slds-text-title_caps slds-text-color_weak">
+                            Total Pipeline
+                        </div>
+                    </div>
+                </div>
+                <!-- Closing Deals -->
+                <div class="slds-col">
+                    
+                    <div class="slds-box slds-text-align_center">
+                        <template lwc:if={isClosingDealsLoading}>
+                            <div class="exampleHolder">
+                                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                            </div>
+                        </template>
+                        <lightning-icon
+                            icon-name="standard:contract"
+                            size="small">
+                        </lightning-icon>
+                        <div class="slds-text-heading_large slds-m-top_x-small">
+                            {closingDeals}
+                        </div>
+                        <div class="slds-text-title_caps slds-text-color_weak">
+                            Closing Deals
+                        </div>
+                    </div>
+                </div>
+                <!-- Top Rep -->
+                <div class="slds-col">
+                    <div class="slds-box slds-text-align_center">
+                        <template lwc:if={isTopRepLoading}>
+                            <div class="exampleHolder">
+                                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                            </div>
+                        </template>
+                        <lightning-icon
+                            icon-name="standard:avatar"
+                            size="small">
+                        </lightning-icon>
+                        <div class="slds-text-heading_large slds-m-top_x-small">
+                            {topRepName}
+                        </div>
+                        <div class="slds-text-heading_large slds-m-top_x-small">
+                            {formattedTopRepAmount}
+                        </div>
+                        <div class="slds-text-title_caps slds-text-color_weak">
+                            Top Rep
+                        </div>
+                    </div>
+                </div>
+                <!-- Avg Deal Size -->
+                <div class="slds-col">
+                    
+                    <div class="slds-box slds-text-align_center">
+                        <template lwc:if={isAvgDealsLoading}>
+                            <div class="exampleHolder">
+                                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                            </div>
+                        </template>
+                        <lightning-icon
+                            icon-name="utility:chart"
+                            size="small">
+                        </lightning-icon>
+                        <div class="slds-text-heading_large slds-m-top_x-small">
+                            {formattedAvgDealSize}
+                        </div>
+                        <div class="slds-text-title_caps slds-text-color_weak">
+                            Avg Deal Size
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div slot="actions">
+            <lightning-button 
+                label="Refresh" 
+                onclick={handleManualRefresh}>
+            </lightning-button>
+            <span class="slds-m-left_small">{lastRefreshed}</span>
+        </div>
+    </lightning-card>
+</template>
