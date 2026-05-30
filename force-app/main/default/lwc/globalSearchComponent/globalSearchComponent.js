@@ -1,6 +1,8 @@
 import { LightningElement } from 'lwc';
+import userId from '@salesforce/user/Id';
 import getSearchResults from '@salesforce/apex/GlobalSearchController.getSearchResults';
 export default class GlobalSearchComponent extends LightningElement {
+    currentUserId = userId;
     searchTerm;
     searchTimeout;
     accounts;
@@ -35,4 +37,5 @@ export default class GlobalSearchComponent extends LightningElement {
     get hasLeads(){
         return this.leads && this.leads.length > 0;
     }
+
 }
