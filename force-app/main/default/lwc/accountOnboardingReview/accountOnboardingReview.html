@@ -1,0 +1,69 @@
+<template>
+    <lightning-card>
+        <div class="slds-p-around_large">
+
+            <!-- Heading -->
+            <h1 class="slds-text-heading_large slds-m-bottom_large">
+                Review Account Details
+            </h1>
+
+            <!-- BASIC INFORMATION -->
+            <div class="section-container slds-m-bottom_large">
+                <h2 class="section-heading">
+                    BASIC INFORMATION
+                </h2>
+
+                <div class="slds-grid slds-wrap slds-p-around_medium">
+
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                        <p class="field-label">Account Name</p>
+                        <p class="field-value">{accountName}</p>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                        <p class="field-label">Industry</p>
+                        <p class="field-value">{industry}</p>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                        <p class="field-label">Phone</p>
+                        <p class="field-value">{phone}</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ADDRESS -->
+            <div class="section-container">
+                <h2 class="section-heading">
+                    ADDRESS
+                </h2>
+
+                <div class="slds-grid slds-wrap slds-p-around_medium">
+
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                        <p class="field-label">Billing Street</p>
+                        <p class="field-value">{billingStreet}</p>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                        <p class="field-label">City</p>
+                        <p class="field-value">{city}</p>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                        <p class="field-label">State</p>
+                        <p class="field-value">{state}</p>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                        <p class="field-label">Country</p>
+                        <p class="field-value">{country}</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </lightning-card>
+</template>

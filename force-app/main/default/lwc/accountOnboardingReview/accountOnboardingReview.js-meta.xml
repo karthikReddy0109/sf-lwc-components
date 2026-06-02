@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name = "accountName" type = "String" label = "Account Name from flow" />
+            <property name = "industry" type = "String" label = "Account industry from flow" />
+            <property name = "phone" type = "String" label = "Account phone from flow" />
+            <property name = "billingStreet" type = "String" label = "Account billing street from flow" />
+            <property name = "city" type = "String" label = "Account city from flow" />
+            <property name = "state" type = "String" label = "Account state from flow" />
+            <property name = "country" type = "String" label = "Account country from flow" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
