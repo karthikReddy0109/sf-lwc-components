@@ -1,0 +1,62 @@
+<template>
+    <lightning-card title="Create Case" icon-name="standard:case">
+        <div class="slds-p-around_medium">
+
+            <!-- Subject -->
+            <lightning-input
+                label="Subject"
+                data-field="subject"
+                onchange={handleFieldChange}
+            >
+            </lightning-input>
+
+            <!-- Description -->
+            <lightning-textarea
+                label="Description"
+                data-field="description"
+                onchange={handleFieldChange}
+                class="slds-m-top_medium"
+            >
+            </lightning-textarea>
+
+            <template lwc:if={isTechnical}>
+                <lightning-combobox
+                    label="Priority"
+                    options={priorityOptions}
+                    data-field="priority"
+                    onchange={handleFieldChange}
+                    class="slds-m-top_medium">
+                </lightning-combobox>
+
+                <!-- Product Version -->
+                <lightning-input
+                    label="Product Version"
+                    data-field="productVersion"
+                    onchange={handleFieldChange}
+                    class="slds-m-top_medium">
+                </lightning-input>
+            </template>
+            
+            <template lwc:if={isBilling}>
+                <lightning-input
+                    type="text"
+                    label="Invoice Number"
+                    data-field="invoiceNumber"
+                    onchange={handleFieldChange}
+                >
+                </lightning-input>
+                <!-- Amount Disputed -->
+                <lightning-input
+                    type="number"
+                    label="Amount Disputed"
+                    data-field="amountDisputed"
+                    onchange={handleFieldChange}
+                    step="0.01"
+                    formatter="currency"
+                    class="slds-m-top_medium"
+                    required>
+                </lightning-input>
+            </template> 
+        </div>
+    </lightning-card>
+</template>
