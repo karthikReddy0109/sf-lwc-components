@@ -1,0 +1,82 @@
+<template>
+    <lightning-card title="Create New Account">
+        <div class="slds-p-around_medium">
+
+            <!-- Account Name -->
+            <lightning-input
+                label="Account Name"
+                value={accountName}
+                onchange={handleAccountNameChange}>
+            </lightning-input>
+
+            <!-- Checking for duplicates -->
+            <template if:true={isChecking}>
+                <div class="slds-m-top_x-small slds-text-color_weak">
+                    Checking for duplicates...
+                </div>
+            </template>
+
+            <!-- Duplicate Accounts -->
+             <template lwc:if={hasDuplicates}>
+                <template for:each={duplicateAccounts} for:item="account">
+                    <div key={account.id} class="slds-box slds-m-bottom_small">
+
+                        <div class="slds-grid slds-wrap slds-grid_align-spread">
+
+                            <!-- Account Details -->
+                            <div class="slds-col slds-size_10-of-12">
+                                <p>
+                                    <strong>Account Name: </strong>
+                                    {account.name}
+                                </p>
+
+                                <p>
+                                    <strong>Industry: </strong>
+                                    {account.industry}
+                                </p>
+
+                                <p>
+                                    <strong>Phone: </strong>
+                                    {account.phone}
+                                </p>
+                            </div>
+
+                            <!-- View Button -->
+                            <div class="slds-col slds-size_2-of-12 slds-text-align_right">
+                                <lightning-button
+                                    label="View"
+                                    variant="neutral"
+                                    data-id={account.id}
+                                    onclick={handleView}>
+                                </lightning-button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </template>
+                <lightning-button-group class="slds-m-top_small">
+                    <lightning-button
+                        variant="brand"
+                        label="Create Anyway ->"
+                        onclick={handleCreateAnyway}>
+                    </lightning-button>
+                </lightning-button-group>
+            </template>
+            
+
+            <template if:true={noDuplicates}>
+                <div class="slds-box slds-theme_success slds-m-top_medium">
+                    <h2 class="slds-text-heading_small slds-m-bottom_x-small">
+                        No Duplicates Found
+                    </h2>
+
+                    <p class="slds-text-body_regular">
+                        Safe to proceed with account creation.
+                    </p>
+                </div>
+            </template>
+            
+        </div>
+    </lightning-card>
+</template>

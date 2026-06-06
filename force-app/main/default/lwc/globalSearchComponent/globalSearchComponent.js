@@ -18,6 +18,7 @@ export default class GlobalSearchComponent extends LightningElement {
             console.log(error);
         }
     }
+    
     handleChange(event){
         this.searchTerm = event.target.value;
         clearTimeout(this.searchTimeout);
