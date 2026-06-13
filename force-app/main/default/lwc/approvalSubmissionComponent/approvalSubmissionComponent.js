@@ -12,13 +12,8 @@ export default class ApprovalSubmissionComponent extends LightningElement {
     comments;
     isSubmissionSuccess = false;
     isSubmitted = false;
-    connectedCallback(){
-        console.log('recordId received: ' + this.recordId);
-    }
     @wire(getPODetails, {recordId: '$recordId'})
     wiredResult(response){
-        console.log('recordId received: ' + this.recordId);
-        console.log('response: ' + JSON.stringify(response));
         const {data, error} = response;
         if(data){
            this.poDetails = data; 
